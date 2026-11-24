@@ -1,0 +1,138 @@
+[index.html](https://github.com/user-attachments/files/35322421/index.html)
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>أسماء الله الحسنى</title>
+<meta name="description" content="لعبة تفاعلية لحفظ أسماء الله الحسنى والتفكر في معانيها">
+<meta name="theme-color" content="#f3e9d2">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3e9d2;--pn:#fffaf0;--br:#c9a96a;--tx:#3b2a1a;--br2:#7a4a2b;--gd:#8a5a1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:inherit}html{background:#f3e9d2}
+body{margin:0 auto;max-width:640px;background:radial-gradient(circle at top,#fbf4e2,var(--bg));color:var(--tx);font-family:Amiri,'Traditional Arabic',serif;min-height:100vh;padding:10px}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+h1{color:var(--gd);margin:0;font-size:24px}
+#fin{display:none;padding:6px 12px;font-size:16px;background:#a33;color:#fff}
+.pl{display:flex;gap:6px;flex-wrap:wrap}
+.p{flex:1;min-width:84px;background:var(--pn);border:2px solid var(--br);border-radius:12px;padding:6px;text-align:center;transition:.3s}
+.p.on{box-shadow:0 0 12px var(--c);border-color:var(--c)}
+.p b{display:block;font-size:18px;color:var(--c)}.p span{font-size:26px;font-weight:700}
+#ts{text-align:center;color:var(--gd);font-size:22px}
+#bar{height:8px;background:#e2d3b0;border-radius:4px;margin:8px 0;overflow:hidden}
+#fill{height:100%;width:100%;background:var(--br2);transition:width .1s linear}
+#msg{text-align:center;min-height:28px;font-size:19px}
+#grid{display:grid;grid-template-columns:repeat(9,1fr);gap:3px;margin:8px 0}
+.c{height:clamp(32px,9.2vw,50px);background:#7a4a2b;border:1px solid #5a3418;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:clamp(7px,2vw,11px);color:#d9bf94;text-align:center;transition:.5s;overflow:hidden;white-space:nowrap;line-height:1}
+.c.o{color:#fff;font-weight:700;font-size:clamp(8px,2.4vw,13px);box-shadow:0 0 5px 1px #c9a96a;border-color:#c9a96a}
+.c.r{animation:rd .3s 3}
+@keyframes rd{50%{background:#e11;box-shadow:0 0 14px #f00}}
+.row{display:flex;gap:6px;margin:6px 0}
+input,button,select{font:inherit;font-size:18px;border-radius:10px;border:1px solid var(--br);background:var(--pn);color:var(--tx);padding:8px}
+input{flex:1;min-width:0}button{background:var(--br2);color:#fff;border:0;font-weight:700}
+.ov{position:fixed;inset:0;background:#3c28148c;display:flex;align-items:center;justify-content:center;padding:16px;z-index:5}
+.ov>div{background:var(--pn);border:1px solid var(--br);border-radius:16px;padding:18px;max-width:400px;width:100%;text-align:center;max-height:92vh;overflow:auto}
+.ov input,.ov select{width:100%;margin:5px 0}.ov p{font-size:16px;margin:6px 0}.ov h2{color:var(--gd);margin:0}
+.big{font-size:24px;font-weight:700}
+.sr{display:flex;justify-content:space-between;border:2px solid;border-radius:10px;padding:6px 10px;margin:5px 0;font-size:20px}
+#mean{display:none;border:1px solid var(--br);border-radius:12px;padding:10px;margin:8px 0;background:var(--pn);line-height:1.8;font-size:17px}#mean h3{margin:0 0 4px;color:var(--gd);font-size:22px}#mean small{display:block;color:#8a7a60;margin-top:4px;font-size:13px}#mean button{margin-top:8px;width:100%}
+details{text-align:right;margin:8px 0;line-height:1.8;font-size:16px}summary{color:var(--gd);font-size:18px}details b{color:var(--gd)}
+#tvb{padding:6px 10px;font-size:18px}
+body.tv{max-width:none;padding:6px 14px}
+body.tv #grid{grid-template-columns:repeat(11,1fr);gap:5px}
+body.tv .c{height:calc((100vh - 250px)/9);font-size:clamp(10px,1.7vw,26px);border-radius:8px}
+body.tv .c.o{font-size:clamp(11px,1.9vw,30px)}
+body.tv h1{font-size:30px}body.tv .p span{font-size:34px}body.tv .p b{font-size:22px}body.tv #msg{font-size:26px}
+body.tv .row{max-width:600px;margin:6px auto}
+</style><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script></head><body>
+<div class="hd"><h1>﷽ أسماء الله الحسنى</h1><button id="tvb" title="وضع التلفاز">📺</button><button id="fin">🏁 إنهاء وحساب الدرجات</button></div>
+<div class="pl" id="pl"></div><div id="ts"></div><div id="sg" style="text-align:center;font-size:17px;color:var(--gd)"></div>
+<div id="bar"><div id="fill"></div></div>
+<div id="msg"></div>
+<div id="mean"></div>
+<div class="row"><input id="tx" lang="ar" autocomplete="off" placeholder="اكتب اسماً من أسماء الله الحسنى"><button id="go">إرسال</button></div>
+<div id="grid"></div>
+<div class="ov" id="ov"><div>
+<h2>أسماء الله الحسنى</h2>
+<details open><summary>ما هي اللعبة؟</summary>
+<p><b>الفكرة:</b> ٩٩ بطاقة مغلقة، كل بطاقة تخفي اسماً من أسماء الله الحسنى. يتناوب المتسابقون على كتابة الأسماء، فتُضاء البطاقة بلون اللاعب ويظهر معنى الاسم ليقرأه الجميع.</p>
+<p><b>الهدف:</b> حفظ أسماء الله الحسنى، والتفكر في معانيها، وقضاء وقت إيماني جميل ومنافسة هادئة بين الأب وابنه أو أفراد الأسرة.</p>
+<p><b>طريقة اللعب:</b> يبدأ كل لاعب بعدد من الدرجات (١٠ افتراضياً). اكتب اسماً لم يُكشف بعد فتحصل على +١ ويُعرض معناه. إذا انتهى الوقت أو كررت اسماً مكشوفاً (تومض بطاقته بالأحمر) تُخصم منك درجة وينتقل الدور.</p>
+<p><b>الفوز:</b> عند كشف الأسماء التسعة والتسعين، أو عند الضغط على «إنهاء»، يفوز صاحب أعلى درجات. وفي وضع الفريق الواحد تُجمع درجات الجميع.</p><p><b>الأنماط:</b> «اللعبة كاملة» لجلسة طويلة، أو «مراحل» لجلسة أقصر: كل مرحلة ١٠ أسماء لشخصين (+٥ لكل لاعب إضافي) ويُقبل أي اسم لم يُكشف من قبل. ويمكنك اختيار مراجعة المعاني أولاً. وفي «ضد الجهاز» تلعب وحدك والجهاز يذكر أسماء بالتناوب. وزر 📺 يحوّل الشاشة إلى وضع التلفاز (عرضي).</p></details>
+<p>نمط اللعب</p><select id="md"><option value="c">تنافس (لكل لاعب درجاته)</option><option value="t">فريق واحد (تُجمع الدرجات)</option><option value="ai">ضد الجهاز (لاعب واحد)</option></select>
+<div id="lv" style="display:none"><p>مستوى الجهاز</p><select id="lvs"><option value="0.3">سهل</option><option value="0.12" selected>متوسط</option><option value="0.03">صعب</option></select></div><p>عدد المتسابقين</p><select id="cn"><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select><div id="nm"></div>
+<p>نمط الجلسة</p><select id="gm"><option value="f">اللعبة كاملة (٩٩ اسماً، وقت أطول)</option><option value="s">مراحل (جلسة أقصر)</option></select><p>مراجعة المعاني قبل البدء</p><select id="lr"><option value="0">لا، ابدأ مباشرة</option><option value="1">نعم، أريد المرور على الأسماء ومعانيها أولاً</option></select><p>عرض معنى الاسم بعد كل اسم صحيح</p><select id="sw"><option value="1">نعم (تتوقف اللعبة لقراءة المعنى)</option><option value="0">لا (لعب أسرع)</option></select><p>مدة كل دور (بالثواني)</p><input id="tt" type="number" min="3" max="120" value="20">
+<p>الدرجات الابتدائية لكل لاعب</p><input id="sp" type="number" min="0" max="999" value="10">
+<p id="rl"></p>
+<button id="rm" style="width:100%;margin-bottom:6px;background:#2f6db5">🌐 لعب من عدة أجهزة (إنشاء غرفة)</button><button id="jn" style="width:100%;margin-bottom:8px;background:#8a5a1c">دخول غرفة برمز</button><button id="rb" style="display:none;width:100%;margin-bottom:8px;background:#2e8b57"></button><button id="st" style="width:100%">ابدأ اللعب</button></div></div>
+<div class="ov" id="rv" style="display:none"></div>
+<script>
+const N="الله,الأحد,الأعلى,الأكرم,الإله,الأول,الآخر,الظاهر,الباطن,الباريء,البر,البصير,التواب,الجبار,الحافظ,الحسيب,الحفيظ,الحفي,الحق,المبين,الحكيم,الحليم,الحميد,الحي,القيوم,الخبير,الخالق,الخلاق,الرؤوف,الرحمن,الرحيم,الرزاق,الرقيب,السلام,السميع,الشاكر,الشكور,الشهيد,الصمد,العالم,العزيز,العظيم,العفو,العليم,العلي,الغفار,الغفور,الغني,الفتاح,القادر,القاهر,القدوس,القدير,القريب,القوي,القهار,الكبير,الكريم,اللطيف,المؤمن,المتعالي,المتكبر,المتين,المجيب,المجيد,المحيط,المصور,المقتدر,المقيت,الملك,المليك,المولى,المهيمن,النصير,الواحد,الوارث,الواسع,الودود,الوكيل,الولي,الوهاب,الجميل,السبوح,المقدم,الجواد,السيد,المؤخر,الحكم,الشافي,المحسن,الحيي,الطيب,المعطي,الرب,القابض,المنان,الرفيق,الباسط,الوتر".split(',');
+const $=id=>document.getElementById(id);
+const norm=s=>s.replace(/[\u064B-\u065F\u0670\u0640ء]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/ئ/g,'ي').replace(/ؤ/g,'و').replace(/[^\u0621-\u064A ]/g,'').trim();
+const key=w=>norm(w).replace(/^(وال|ال)/,'').replace(/(?!^)ا/g,'');
+const K=N.map(key);
+const M=["علم على الذات المقدسة، أصله الإله بمعنى المألوه أي المعبود حباً وتعظيماً، وهو أصل الأسماء.","المتوحد بجلاله وعظمته، ليس له مثيل ولا شريك.","من العلو: علو الصفة وعلو الذات، فهو فوق عباده مستوٍ على عرشه، وأكمل الصفات له.","البالغ في الكرم، يعطي فوق ما يُؤمَّل ويُسأل.","بمعنى المألوه: المعبود تذللاً ومحبة.","الذي ليس قبله شيء، فكل الموجودات بعده.","الذي ليس بعده شيء، فهو الأول لا ابتداء له والآخر لا انتهاء له.","الذي ليس فوقه شيء، فكل المخلوقات تحته جل وعلا.","الذي ليس دونه شيء، لا يحول دونه حائل، خبير عليم بكل شيء.","الخالق على غير مثال سبق، يخلق خلقاً ابتداءً.","الواسع الإحسان والرحمة والجود والعطاء.","المدرك بصره عز وجل لكل مبصر، ويدل كذلك على إحاطة علمه.","كثير التوبة على عبده: يوفقه للتوبة ثم يقبلها منه.","له ثلاثة معانٍ: جبر القوة والقهر، وجبر الكسير وإصلاح الحال، والعلو.","يحفظ عباده ودينهم وأبدانهم؛ ومن حفظ دين الله حفظه الله.","المحاسب لكل أحد على أعماله، ومعناه أيضاً الكافي.","المراقب المطلع المهيمن على كل شيء، لا يخفى عليه شيء.","البالغ في اللطف والإكرام بعباده (ورد مقيداً في القرآن).","الحق في ذاته وجوداً واستحقاقاً، وأحكامه وأفعاله كلها حق.","البيّن الذي لا يخفى، والمبيّن للحق لعباده.","ذو الحكمة والإحكام: يضع الشيء في موضعه في قدره وشرعه.","الذي يؤخر العقوبة عن مستحقها لعل عبده يتوب.","المحمود على كمال صفاته وتمام إنعامه، والحامد لمن يستحق الحمد.","كامل الحياة: لا أول لها ولا نهاية، ولا يدخلها نقص.","القائم بنفسه فلا يحتاج إلى أحد، والقائم على غيره فكل أحد محتاج إليه.","ذو الخبرة: العالم ببواطن الأمور وخفاياها.","الموجِد للشيء على الصورة التي أرادها، بتقدير وتسوية وإحكام.","كثير الخلق: يخلق خلقاً بعد خلق، والخلق يدل على علمه وقدرته.","ذو الرأفة: أشد الرحمة وأرقّها، وفيها رقة ولين بالغان.","ذو الرحمة الواسعة التي وسعت كل شيء، يرحم من يشاء.","الموصل رحمته إلى من يشاء من عباده، والرحمة تتجدد بتجدد من يرحمهم.","كثير الرزق والعطاء لجميع خلقه.","الذي يراقب عباده في جميع أحوالهم إحاطةَ علم.","السالم من كل نقص وعيب في ذاته وصفاته وأفعاله، ومنه السلامة.","يسمع كل صوت، وسمعه سماعٌ للأصوات وإجابةٌ للدعاء.","يثيب العامل أكثر من عمله، فلا يضيع عمل عبده.","يشكر العمل الصالح ويضاعف الأجر، وكلما كثر العمل كثر الشكر.","الحاضر المطلع الذي لا يغيب ولا يخفى عليه شيء، وهو على عرشه.","الكامل في صفاته، الذي افتقرت إليه جميع مخلوقاته وهو مستغنٍ عنها.","عالم الغيب المطلق عن كل أحد، فلا يغيب عنه شيء في السماوات والأرض.","له ثلاث معانٍ: عزة القدر وعزة القهر وعزة الامتناع.","ذو العظمة في ذاته وسلطانه وصفاته.","المتجاوز عن عباده، وعفوه كامل مقرون بالقدرة لا بالعجز.","المتصف بالعلم المطلق: لم يُسبق بجهل ولم يلحقه نسيان.","ذو العلو المطلق: علو الذات وعلو القدر وعلو القهر.","الكثير المغفرة: يستر الذنب ويتجاوز عنه، وما أكثر من يغفر لهم.","كثير المغفرة، وكثرة من يغفر لهم وكثرة ذنوبهم التي يغفرها.","غني في نفسه لكثرة ما عنده، وغني عن خلقه فلا يحتاج إلى أحد.","كثير الفتح على عباده: بالنصر والحكم بينهم والرزق والرحمة.","الذي له القدرة الكاملة لا يلحقها عجز.","الغالب بسلطان تام، فكل جبار تحت قهره.","المتقدس المتنزه عن كل نقص وعيب.","عظيم القدرة، قدرته عامة على كل شيء.","قريب بذاته مع علوه على عرشه، وقريب من الداعين والعابدين بإجابته.","قوي أزلاً وأبداً: لم يسبق قوته ضعف ولا يلحقها ضعف.","الغالب لكل جبار، كثير القهر لمن يقهرهم.","ذو الكبرياء، لا يماثله شيء في ذاته.","كثير الخير والعطاء، وكرمه لا يماثله كرم المخلوق.","يدرك خفايا الأمور وأسرارها، ويلطف بعبده في مواقع الإحسان.","يؤمّن من يشاء من عذابه، ويصدّق رسله.","المترفع عن كل نقص، وهو أبلغ من (العالي).","ذو الكبرياء، وله الكبرياء في السماوات والأرض.","الشديد في قوته وفي عقابه وفيما تقتضي الحكمة الشدة فيه.","يجيب دعوات الداعين، فادعه بإخلاص وأنت موقن بالإجابة.","ذو العظمة والسلطان الكامل، وهو الذي يمجّد العبد يوم الدين.","أحاط علماً وقدرةً وسلطاناً وتدبيراً بكل شيء.","الذي صوّر الخلق على صور مختلفة كما شاء.","أبلغ من القادر: لا تمانع قوته قوة ولا قدرته قدرة.","المقتدر الحفيظ، يعطي كل مخلوق قوته.","ذو الملك والسيطرة الكاملة على كل شيء.","الذي يتصرف في كل شيء كما يشاء، وهو ربه وخالقه.","الناصر والمتولي لأمور عباده المؤمنين ولاية خاصة.","ذو السيطرة والحكم على كل من سواه، ومنه كون القرآن مهيمناً على الكتب.","الذي يدافع عنك ممن يعتدي عليك فينصرك.","واحد في ألوهيته وربوبيته وأسمائه وصفاته.","الباقي بعد فناء خلقه، يرث الأرض ومن عليها.","واسع الإحاطة والصفات: واسع العلم والقدرة والرحمة.","خالص المحبة: محبوب من عباده وهو يحب عباده المؤمنين.","الكافي الحافظ المراقب المتصرف في شؤون عباده.","الذي يتولى عباده المؤمنين بالعناية والنصر وتحصيل مطلوبهم ودفع مرهوبهم.","كثير العطاء، وعطاؤه لا ينقص ما عنده.","الذي له الجمال في ذاته وصفاته وأفعاله، ويحب الجمال.","المبالغ في التنزيه والتقديس عن كل نقص.","الذي يقدّم من يشاء بحكمته: يرفع ويقدّم ويوفّق.","كثير الجود والكرم، يعطي بلا حساب.","ذو السيادة المطلقة من كل الوجوه.","الذي يؤخر من يشاء بحكمته: يخفض ويؤخر ويبعد.","المستحق أن يحكم على عباده، وإليه الحكم وحده.","الذي يشفي المرضى: لا شفاء إلا شفاؤه.","الذي أحسن كل شيء خلقه، وهو محسن إلى عباده.","من الحياء، لا من الحياة: كثير الحياء والستر على عبده.","الطاهر المنزه عن النقائص، لا يعتريه خبث بوجه.","الذي يعطي عباده، ويقترن معنى العطاء بالمنع حكمةً منه.","المالك المتصرف المربي لعباده تربية حسية ومعنوية.","يقبض الرزق وغيره بحكمته ويبسطه لمن يشاء، فهو ضد البسط.","الكثير الإنعام والعطاء، يبدأ بالنوال قبل السؤال.","الرفيق بعباده: يعاملهم باللين والتأنّي في أمورهم.","يبسط الرزق والرحمة لمن يشاء من عباده.","المنفرد بذاته وصفاته؛ في بعض الأقوال اسم ثابت وفي بعضها صفة."];
+const NA=['الأكرم','الحفي','المقدم','المؤخر','المحسن'];
+const lev=(a,b)=>{const d=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let p=d[0];d[0]=i;for(let j=1;j<=b.length;j++){const t=d[j];d[j]=Math.min(d[j]+1,d[j-1]+1,p+(a[i-1]==b[j-1]?0:1));p=t}}return d[b.length]};
+const COL=['#2e8b57','#2f6db5','#d2691e','#c2185b','#7b4bb0','#138d75'],DN=['الأب','الابن','المتسابق ٣','المتسابق ٤','المتسابق ٥','المتسابق ٦'];
+let P=[],T=10,team=false,stg=0,S=10,base=0,tgt=99,nst=1,lrn=false,sm=true,rc={},aiF=.12,ait,ext=null,role=null,room=null,pt,curM=-1,dl=0,lastMi=-2,lst=[],drain=false,t=0,left=10,on=false,busy=false,tm,rev=new Set(),cards=[],ac,pz=false;
+const g=$('grid');
+N.forEach((_,i)=>{const d=document.createElement('div');d.className='c';d.onclick=()=>{if(rev.has(i))showM(i,false)};g.append(d);cards.push(d)});
+function showM(i,p){if(pz&&!p)return;pz=p;const m=$('mean');m.style.display='block';m.innerHTML='<h3>'+N[i]+'</h3>'+M[i]+(NA.includes(N[i])?'':'<small>من شرح الشيخ ابن عثيمين رحمه الله</small>')+(p?'<button id="nx">التالي ◀</button>':'');if(p)$('nx').onclick=()=>{pz=false;m.style.display='none';if(!stageEnd())next()}}
+function beep(f,l=.15){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),v=ac.createGain();o.frequency.value=f;v.gain.value=.15;o.connect(v);v.connect(ac.destination);o.start();o.stop(ac.currentTime+l)}catch(e){}}
+function ui(){const pl=$('pl');if(pl.children.length!=P.length)pl.innerHTML=P.map((p,i)=>'<div class="p" id="p'+i+'"><b></b><span>0</span></div>').join('');$('sg').textContent=stg?'المرحلة '+stg+' من '+nst+' — '+(rev.size-base)+' / '+tgt+' أسماء':'';$('ts').textContent=team?'درجات الفريق: '+P.reduce((a,p)=>a+p.s,0):'';P.forEach((p,i)=>{const e=$('p'+i);e.style.setProperty('--c',p.c);e.querySelector('b').textContent=p.n;e.querySelector('span').textContent=p.s;e.classList.toggle('on',on&&t==i)})}
+function msg(m){$('msg').textContent=m}
+function next(){t=(t+1)%P.length;left=T;busy=true;setTimeout(()=>busy=false,900);ui();msg('الدور على '+P[t].n+': اكتب اسماً من أسماء الله');$('tx').focus();aiGo()}
+function find(w){const k=key(w);if(!k)return -1;let i=K.indexOf(k);if(i>=0)return i;if(k.length>=6)i=K.findIndex(x=>x.length>=6&&lev(x,k)<=1);return i}
+function heard(txt,from){if(!on||busy||P[t].ai)return;if(role=='h'&&P[t].pid!=(from||me))return;const ws=norm(txt).split(/\s+/).filter(w=>w&&w!='يا');let rp=-1;
+for(const w of ws){const i=find(w);if(i<0)continue;if(!rev.has(i))return ok(i);rp=i}
+if(rp>=0)bad(rp,'تكرار! «'+N[rp]+'» ذُكر من قبل')}
+function ok(i){rev.add(i);rc[i]=P[t].c;const c=cards[i];c.textContent=N[i];c.classList.add('o');c.style.background=P[t].c;P[t].s++;beep(880,.25);msg('✨ '+N[i]);ui();if(rev.size==99){on=false;clearInterval(tm);return result(true)}busy=true;sv();if(sm)showM(i,true);else setTimeout(()=>{if(!stageEnd())next()},800)}
+function bad(i,m){P[t].s--;sv();if(i>=0){cards[i].classList.remove('r');void cards[i].offsetWidth;cards[i].classList.add('r')}beep(220,.4);msg(m+' (−١)');ui();busy=true;setTimeout(next,1100)}
+function tick(){if(!on||busy)return;left-=.1;$('fill').style.width=Math.max(0,left/T*100)+'%';if(left<=0)bad(-1,'انتهى الوقت')}
+function result(fin){if(fin)sclr();const tot=P.reduce((a,p)=>a+p.s,0),mx=Math.max(...P.map(p=>p.s)),s=[...P].sort((a,b)=>b.s-a.s);
+const w=team?'درجات الفريق: '+tot:(s.filter(p=>p.s==mx).length>1?'تعادل جميل 🤝':'🏆 الفائز: '+s[0].n);
+$('rv').innerHTML='<div><h2>'+(rev.size==99?'أُنيرت الأسماء التسعة والتسعون 🌟':'نتيجة اللعبة')+'</h2><p class="big">'+w+'</p><p>كُشف '+rev.size+' من ٩٩ اسماً</p>'+s.map(p=>'<div class="sr" style="border-color:'+p.c+'"><span>'+p.n+'</span><b>'+p.s+'</b></div>').join('')+'<p>تأملا معاً: أي اسم أثّر فيكما اليوم؟</p>'+(fin?'':'<button id="rs">متابعة اللعب</button> ')+'<button onclick="location.reload()">لعبة جديدة</button></div>';
+$('rv').style.display='flex';if(!fin)$('rs').onclick=()=>{$('rv').style.display='none';on=true;tm=setInterval(tick,100);$('tx').focus();aiGo()}}
+$('fin').onclick=()=>{if(!on)return;on=false;clearInterval(tm);result(false)};
+$('st').onclick=()=>{const ai=$('md').value=='ai'&&!ext,c=ext?ext.length:ai?2:+$('cn').value;team=$('md').value=='t';aiF=+$('lvs').value;T=Math.min(120,Math.max(3,+$('tt').value||20));const s0=$('sp').value===''?10:Math.max(0,+$('sp').value);P=[];for(let i=0;i<c;i++)P.push(ext?{n:ext[i].n,s:s0,c:COL[i],pid:ext[i].pid}:ai&&i==1?{n:'الجهاز',s:s0,c:COL[1],ai:1}:{n:($('n'+i)||{}).value||DN[i],s:s0,c:COL[i]});$('ov').style.display='none';stg=$('gm').value=='s'?1:0;S=10+5*(c-2);nst=Math.ceil(99/S);base=0;tgt=stg?Math.min(S,99):99;lrn=$('lr').value=='1';sm=$('sw').value=='1';rc={};t=c-1;ui();lrn?learn(0):begin()};function begin(){$('rv').style.display='none';$('fin').style.display='block';on=true;beep(600);next();tm=setInterval(tick,100)}
+$('go').onclick=()=>{const v=$('tx').value;$('tx').value='';if(v){if(role=='c')fb('/inbox/'+rid(),'PUT',{p:me,x:v});else heard(v)}$('tx').focus()};
+$('tx').onkeydown=e=>{if(e.key=='Enter')$('go').click()};
+function mk(){const ai=$('md').value=='ai';$('lv').style.display=ai?'block':'none';$('cn').disabled=ai;if(ai)$('cn').value=2;const o=[...document.querySelectorAll('#nm input')].map(x=>x.value),c=ai?1:+$('cn').value;let h='';for(let i=0;i<c;i++)h+='<input id="n'+i+'" value="'+(o[i]||DN[i])+'" style="border-color:'+COL[i]+'">';$('nm').innerHTML=h;$('rl').textContent=($('md').value=='t'?'فريق واحد: الأدوار بالتناوب وتُجمع الدرجات. ':'تنافس: لكل لاعب درجاته. ')+'اسم جديد = +١ ، تأخير أو تكرار = −١.'+($('gm').value=='s'?' كل مرحلة '+(10+5*(+$('cn').value-2))+' أسماء.':'')}
+function sv(){try{localStorage.setItem('asma1',JSON.stringify({P,T,team,stg,S,base,tgt,nst,sm,rc,aiF,nt:(t+1)%P.length}))}catch(e){}}
+function sclr(){try{localStorage.removeItem('asma1')}catch(e){}}
+let sd=null;try{sd=JSON.parse(localStorage.getItem('asma1'))}catch(e){}
+if(sd&&sd.P&&sd.rc&&Object.keys(sd.rc).length){const n=Object.keys(sd.rc).length;$('rb').style.display='block';$('rb').textContent='▶ متابعة الجلسة المحفوظة (كُشف '+n+' من ٩٩'+(sd.stg?'، المرحلة '+sd.stg:'')+')';$('rb').onclick=()=>{({P,T,team,stg,S,base,tgt,nst,sm,rc}=sd);aiF=sd.aiF||.12;rev=new Set(Object.keys(rc).map(Number));rev.forEach(i=>{cards[i].textContent=N[i];cards[i].classList.add('o');cards[i].style.background=rc[i]});if(stg&&rev.size-base>=tgt){base=rev.size;stg++;tgt=Math.min(S,99-base)}t=(sd.nt-1+P.length)%P.length;$('ov').style.display='none';ui();begin()}}
+const DB='https://asma-allah-bd7d9-default-rtdb.asia-southeast1.firebasedatabase.app/rooms/';
+const me=(()=>{try{let m=sessionStorage.getItem('me');if(!m){m=Math.random().toString(36).slice(2,8);sessionStorage.setItem('me',m)}return m}catch(e){return Math.random().toString(36).slice(2,8)}})();
+const esc=x=>String(x).replace(/[<>&"']/g,''),rid=()=>Math.random().toString(36).slice(2);
+const fb=(p,m,b)=>fetch(DB+room+p+'.json',{method:m||'GET',body:b===undefined?undefined:JSON.stringify(b)}).then(r=>r.json()).catch(()=>null);
+function push(){if(role!='h')return;clearTimeout(pt);pt=setTimeout(()=>fb('/state','PUT',{P:P.map(p=>({n:p.n,s:p.s,c:p.c,pid:p.pid||''})),t,rc,msg:$('msg').textContent,stg,base,tgt,nst,pz,mi:pz?curM:-1,lt:left,T,team,on,rv:$('rv').style.display=='flex'?$('rv').innerHTML:'',ts:Date.now()}),150)}
+const _ui=ui,_msg=msg,_sh=showM,_se=stageEnd,_rs=result,_ln=learn;
+ui=function(){_ui();push()};msg=function(m){_msg(m);push()};showM=function(i,p){curM=i;_sh(i,p);push()};stageEnd=function(){const r=_se();push();return r};result=function(f){_rs(f);push()};learn=function(i){_ln(i);push()};
+async function pollIn(){if(role!='h')return;const d=await fb('/inbox');if(!d)return;for(const k in d){const m=d[k];await fb('/inbox/'+k,'DELETE');if(m.c=='next'){const b=$('nx');b&&b.click()}else if(m.x)heard(m.x,m.p)}}
+setInterval(push,3000);setInterval(pollIn,700);
+async function mkRoom(){const ch='ABCDEFGHJKMNPQRSTUVWXYZ23456789';room=Array.from({length:4},()=>ch[Math.random()*ch.length|0]).join('');role='h';await fb('/created','PUT',Date.now());await fb('/join/'+me,'PUT',{n:esc(($('n0')||{}).value||DN[0]),t:0});const link=location.href.split('#')[0]+'#'+room;
+$('ov').style.display='none';$('rv').innerHTML='<div><h2>غرفة اللعب</h2><p class="big" style="letter-spacing:6px">'+room+'</p><p>شاركوا الرمز أو الرابط أو امسحوا الباركود:</p><input readonly value="'+link+'" onclick="this.select()"><div id="qr" style="display:flex;justify-content:center;margin:8px"></div><p>المنضمّون:</p><div id="ll"></div><button id="gs" style="width:100%;margin-top:8px">ابدأ اللعب</button></div>';$('rv').style.display='flex';
+if(window.QRCode)new QRCode($('qr'),{text:link,width:150,height:150});
+const lp=async()=>{const j=await fb('/join');if(!j)return;lst=Object.entries(j).sort((a,b)=>a[1].t-b[1].t);$('ll').innerHTML=lst.map(([k,v])=>'<div class="sr" style="border-color:#c9a96a"><span>'+esc(v.n)+'</span></div>').join('')};lp();const iv=setInterval(lp,1500);
+$('gs').onclick=()=>{if(lst.length<2){$('ll').insertAdjacentHTML('beforeend','<p>يلزم لاعبان على الأقل</p>');return}clearInterval(iv);ext=lst.slice(0,6).map(([k,v])=>({n:esc(v.n),pid:k}));$('st').onclick()}}
+function showJoin(code){$('ov').style.display='none';$('rv').innerHTML='<div><h2>الدخول إلى غرفة</h2><input id="jc" placeholder="رمز الغرفة" value="'+esc(code||'')+'" style="text-align:center;letter-spacing:4px"><input id="jnm" placeholder="اسمك"><button id="jg" style="width:100%">دخول</button><p id="je"></p></div>';$('rv').style.display='flex';
+$('jg').onclick=async()=>{const c=$('jc').value.trim().toUpperCase(),n=esc($('jnm').value.trim()||'لاعب');room=c;const ex=await fb('/created');if(!ex){$('je').textContent='الرمز غير صحيح أو لا يوجد اتصال';room=null;return}role='c';await fb('/join/'+me,'PUT',{n,t:Date.now()});$('rv').innerHTML='<div><h2>أنت في الغرفة '+esc(c)+'</h2><p>بانتظار بدء المضيف…</p></div>';$('fin').style.display='none';setInterval(async()=>{const st=await fb('/state');if(st&&st.P)render(st)},1000);setInterval(cbar,200)}}
+function cbar(){if(role!='c')return;if(drain)left=Math.max(0,(dl-Date.now())/1000);$('fill').style.width=Math.max(0,left/T*100)+'%'}
+function render(s){P=Object.values(s.P);t=s.t;stg=s.stg||0;base=s.base||0;tgt=s.tgt||99;nst=s.nst||1;team=!!s.team;on=!!s.on;T=s.T||20;
+const r={};Object.entries(s.rc||{}).forEach(([k,v])=>{if(v)r[k]=v});rc=r;rev=new Set(Object.keys(r).map(Number));
+rev.forEach(i=>{const c=cards[i];if(!c.classList.contains('o')){c.textContent=N[i];c.classList.add('o');c.style.background=r[i]}});
+left=s.lt||0;dl=Date.now()+left*1000;drain=on&&!s.pz&&!s.rv;
+if(s.rv){$('rv').innerHTML=s.rv;$('rv').querySelectorAll('button').forEach(b=>b.remove());$('rv').style.display='flex'}else $('rv').style.display='none';
+$('msg').textContent=s.msg||'';
+const mi=s.mi>=0?s.mi:-1;if(mi!=lastMi){lastMi=mi;const m=$('mean');if(mi<0)m.style.display='none';else{m.style.display='block';m.innerHTML='<h3>'+N[mi]+'</h3>'+M[mi]+'<button id="nx2">التالي ◀</button>';$('nx2').onclick=()=>fb('/inbox/'+rid(),'PUT',{c:'next'})}}
+ui()}
+$('rm').onclick=mkRoom;$('jn').onclick=()=>showJoin('');
+if(location.hash.length>1)showJoin(location.hash.slice(1).toUpperCase());
+function aiGo(){clearTimeout(ait);if(!on||!P[t].ai)return;ait=setTimeout(()=>{if(!on||busy||!P[t].ai||Math.random()<aiF)return;const f=N.map((_,i)=>i).filter(i=>!rev.has(i));if(f.length)ok(f[Math.floor(Math.random()*f.length)])},1500+Math.random()*Math.min(T*1000-2500,6000))}
+$('tvb').onclick=async()=>{const tv=document.body.classList.toggle('tv');try{if(tv){await document.documentElement.requestFullscreen();await screen.orientation.lock('landscape')}else{screen.orientation.unlock&&screen.orientation.unlock();document.fullscreenElement&&await document.exitFullscreen()}}catch(e){}};
+$('gm').onchange=mk;$('cn').onchange=mk;$('md').onchange=mk;mk();
+function stageEnd(){if(!stg||rev.size-base<tgt)return false;on=false;clearInterval(tm);const s=[...P].sort((a,b)=>b.s-a.s);$('rv').innerHTML='<div><h2>أتممتم المرحلة '+stg+' من '+nst+' 🌟</h2><p>كُشف '+rev.size+' من ٩٩ اسماً</p>'+s.map(p=>'<div class="sr" style="border-color:'+p.c+'"><span>'+p.n+'</span><b>'+p.s+'</b></div>').join('')+'<p>استريحوا قليلاً ثم أكملوا.</p><button id="ns">المرحلة التالية ◀</button> <button onclick="result(true)">إنهاء</button></div>';$('rv').style.display='flex';$('ns').onclick=()=>{$('rv').style.display='none';base=rev.size;stg++;tgt=Math.min(S,99-base);sv();on=true;tm=setInterval(tick,100);next()};return true}
+function learn(i){$('rv').innerHTML='<div><p>المراجعة قبل البدء: '+(i+1)+' / ٩٩</p><h2 style="font-size:34px">'+N[i]+'</h2><p style="font-size:19px;line-height:1.9">'+M[i]+'</p><div class="row">'+(i?'<button id="lp" style="flex:1">▶ السابق</button>':'')+'<button id="ln" style="flex:1">'+(i<98?'التالي ◀':'ابدأ اللعب')+'</button></div><button id="ls" style="background:#8a7a60;width:100%">تخطي وابدأ اللعب</button></div>';$('rv').style.display='flex';$('ln').onclick=()=>i<98?learn(i+1):begin();$('ls').onclick=begin;if(i)$('lp').onclick=()=>learn(i-1)}
+</script></body></html>
